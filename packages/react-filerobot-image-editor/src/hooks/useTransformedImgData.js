@@ -108,6 +108,7 @@ const useTransformedImgData = () => {
       }
 
       if (layer.attrs.mask) {
+        layer.opacity(1);
         layer.fill('#FFF');
         layer.stroke('#FFF');
       }
