@@ -1,4 +1,6 @@
 import addFilter, { ADD_FILTER } from './addFilter';
+import setPrompt, { SET_PROMPT } from './setPrompt';
+import replaceImage, { REPLACE_IMAGE } from './replaceImage';
 import hideLoader, { HIDE_LOADER } from './hideLoader';
 import redo, { REDO } from './redo';
 import reset, { RESET } from './reset';
@@ -64,6 +66,8 @@ export default {
   [SET_RESIZE]: setResize,
   [REMOVE_ANNOTATIONS]: removeAnnotations,
   [DUPLICATE_ANNOTATIONS]: duplicateAnnotations,
+  [SET_PROMPT]: setPrompt,
+  [REPLACE_IMAGE]: replaceImage,
   // End of Design actions.
   [UNDO]: undo,
   [REDO]: redo,
@@ -96,6 +100,7 @@ export {
   CHANGE_ROTATION,
   TOGGLE_FLIP,
   SET_RESIZE,
+  SET_PROMPT,
   REMOVE_ANNOTATIONS,
   DUPLICATE_ANNOTATIONS,
   // End of Design actions.

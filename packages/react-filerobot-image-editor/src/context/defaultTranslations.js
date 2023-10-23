@@ -56,6 +56,7 @@ export default {
   fromGallery: 'From gallery',
   lineTool: 'Line',
   penTool: 'Pen',
+  promptTool: 'Prompt',
   polygonTool: 'Polygon',
   sides: 'Sides',
   rectangleTool: 'Rectangle',

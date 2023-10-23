@@ -1,11 +1,16 @@
 /** External Dependencies */
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import { Image, Layer } from 'react-konva';
 
 /** Internal Dependencies */
 import getDimensionsMinimalRatio from 'utils/getDimensionsMinimalRatio';
 import cropImage from 'utils/cropImage';
-import { DESIGN_LAYER_ID, IMAGE_NODE_ID, TOOLS_IDS } from 'utils/constants';
+import {
+  DESIGN_LAYER_ID,
+  IMAGE_NODE_ID,
+  TABS_IDS,
+  TOOLS_IDS,
+} from 'utils/constants';
 import { SET_SHOWN_IMAGE_DIMENSIONS } from 'actions';
 import getProperImageToCanvasSpacing from 'utils/getProperImageToCanvasSpacing';
 import { useStore } from 'hooks';
@@ -19,6 +24,7 @@ const MIN_SPACED_WIDTH = 10; // As sometimes the spaced width is less than that 
 
 const DesignLayer = () => {
   const designLayerRef = useRef();
+  const state = useStore();
   const {
     initialCanvasWidth,
     initialCanvasHeight,
@@ -26,6 +32,7 @@ const DesignLayer = () => {
     canvasHeight,
     dispatch,
     toolId,
+    tabId,
     canvasScale,
     originalImage = {},
     finetunes = [],
@@ -33,10 +40,11 @@ const DesignLayer = () => {
     filter = null,
     adjustments: { rotation = 0, crop = {}, isFlippedX, isFlippedY } = {},
     resize,
-  } = useStore();
+  } = state;
   const imageNodeRef = useRef();
   const previewGroupRef = useRef();
   const isCurrentlyCropping = toolId === TOOLS_IDS.CROP;
+  const isCurrentlyMasking = tabId === TABS_IDS.INPAINT;
 
   const finetunesAndFilter = useMemo(
     () => (filter ? [...finetunes, filter] : finetunes),
@@ -279,6 +287,7 @@ const DesignLayer = () => {
         {...finetunesProps}
       />
       <AnnotationNodes />
+      {!!isCurrentlyMasking && <AnnotationNodes mask />}
       <PreviewGroup ref={previewGroupRef} />
     </Layer>
   );
