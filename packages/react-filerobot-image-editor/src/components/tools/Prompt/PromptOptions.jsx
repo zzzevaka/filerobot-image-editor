@@ -6,6 +6,9 @@ import Textarea from '@scaleflex/ui/core/textarea';
 import usePrompt from 'hooks/usePrompt';
 import { REPLACE_IMAGE } from 'actions/replaceImage';
 import { useStore, useTransformedImgData } from 'hooks';
+import { SHOW_LOADER } from 'actions/showLoader';
+import { HIDE_LOADER } from 'actions/hideLoader';
+
 
 const PromptOptions = () => {
   const state = useStore();
@@ -15,6 +18,8 @@ const PromptOptions = () => {
   const handleSubmit = () => {
     const img = transformImgFn({ mask: false });
     const msk = transformImgFn({ mask: true });
+
+    state.dispatch({ type: SHOW_LOADER });
 
     state
       ?.handleInpaint({
@@ -33,7 +38,8 @@ const PromptOptions = () => {
             },
           });
         };
-      });
+      })
+      .then(() => state.dispatch({ type: HIDE_LOADER }));
   };
 
   return (

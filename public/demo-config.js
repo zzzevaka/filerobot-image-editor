@@ -163,6 +163,14 @@ const config = {
   // shadowOpacity: 1,
   // opacity: 1,
   // },
+  [TOOLS.PEN]: {
+    stroke: '#bf23d7',
+    strokeWidth: 20,
+    tension: 0.5,
+    opacity: 0.5,
+    lineCap: 'round',
+    selectAnnotationAfterDrawing: false,
+  },
   [TOOLS.CROP]: {
     // maxWidth: 700,
     // maxHeight: 300,
@@ -319,7 +327,15 @@ const config = {
       onClick: (_openSaveModal, saveDirectly) => saveDirectly(console.log),
     },
   ],
-  handleInpaint: () => alert('Hola'),
+  handleInpaint: (config) => {
+    return new Promise((resolve, reject) => {
+      console.log('start');
+      setTimeout(() => {
+        console.log('finish');
+        resolve(config.mask);
+      }, 2000);
+    });
+  },
   // defaultImageFileName: 'Test',
   // theme: {},
   // useBackendTranslations: true, // if false, translations object will be used if not provided default translations will be there.
