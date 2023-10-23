@@ -90,10 +90,35 @@ const useTransformedImgData = () => {
       scaleY: isFlippedY ? -1 : 1,
     });
 
+    if (currentImgFileInfo.mask) {
+      preparedCanvas.children[0].children[0] = new Konva.Rect({
+        x: 0,
+        y: 0,
+        width: preparedCanvas.width(),
+        height: preparedCanvas.height(),
+        fill: '#000',
+        stroke: '#000',
+        strokeWidth: 1,
+      });
+    }
+
+    preparedCanvas.children[0].children.slice(1).forEach((layer) => {
+      if (!!currentImgFileInfo.mask !== !!layer.attrs.mask) {
+        layer.destroy();
+      }
+
+      if (layer.attrs.mask) {
+        layer.fill('#FFF');
+        layer.stroke('#FFF');
+      }
+    });
+
     const [preparedDesignLayer] = preparedCanvas.children; // children[0] = Design layer
     preparedCanvas.children[1].destroy(); // children[1] = Transformers layer, which is not needed anymore
     const imgNode = preparedCanvas.findOne(`#${IMAGE_NODE_ID}`);
-    imgNode.cache();
+    if (imgNode) {
+      imgNode.cache();
+    }
 
     const preparedDesignLayerScale = {
       x: preparedCanvas.width() / shownImageDimensions.width,
@@ -199,8 +224,7 @@ const useTransformedImgData = () => {
     );
     Object.keys(finalImgDesignState.annotations).forEach((k) => {
       const annotation = finalImgDesignState.annotations[k];
-      const imgSrc =
-        annotation.name === TOOLS_IDS.IMAGE && annotation.image?.src;
+      const imgSrc = annotation.name === TOOLS_IDS.IMAGE && annotation.image?.src;
       if (imgSrc && imgSrc.startsWith('blob:')) {
         finalImgDesignState.annotations[k].image = imageToBase64(
           annotation.image,
@@ -225,7 +249,9 @@ const useTransformedImgData = () => {
     // Reseting isSaving to false so we get everything back to normal if user wants to continue editing after saving.
     designLayer.setAttr('isSaving', false);
     dispatch({ type: SET_SAVED });
-    imgNode.clearCache();
+    if (imgNode) {
+      imgNode.clearCache();
+    }
 
     Konva.pixelRatio = previewPixelRatio;
 

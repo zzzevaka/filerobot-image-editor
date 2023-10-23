@@ -30,6 +30,7 @@ const setAnnotation = (state, payload = {}) => {
     annotations: {
       ...state.annotations,
       [annotationId]: {
+        mask: state.tabId === 'Inpaint',
         ...(replaceCurrent ? {} : existedAnnotation),
         ...newAnnotation,
       },

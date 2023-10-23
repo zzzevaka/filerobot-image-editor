@@ -319,6 +319,7 @@ const config = {
       onClick: (_openSaveModal, saveDirectly) => saveDirectly(console.log),
     },
   ],
+  handleInpaint: () => alert('Hola'),
   // defaultImageFileName: 'Test',
   // theme: {},
   // useBackendTranslations: true, // if false, translations object will be used if not provided default translations will be there.

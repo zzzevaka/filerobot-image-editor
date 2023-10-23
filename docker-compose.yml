@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8008:8000"
+      - "3000:3000"
+      - "1111:1111"
+    volumes:
+      - .:/app
+    command: "yarn dev --host=0.0.0.0"

@@ -16,6 +16,7 @@ const extractCurrentDesignState = (state, useStateAsConfig) => {
 
   return {
     imgSrc: state.imgSrc || initialAppState.imgSrc,
+    originalImage: state.originalImage || initialAppState.originalImage,
     finetunes: state.finetunes || initialAppState.finetunes,
     finetunesProps: state.finetunesProps || initialAppState.finetunesProps,
     filter: state.filter || initialAppState.filter,

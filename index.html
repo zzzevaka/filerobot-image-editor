@@ -211,6 +211,10 @@
     </section>
 
     <section class="filerobot-features container-fluid">
+      <div style="display: flex; flex-wrap: nowrap">
+        <img id="img" src="" alt="msk" width="500px" style="border: 1px solid black; display: none" />
+        <img id="msk" src="" alt="msk" width="500px" style="border: 1px solid black; display: none" />
+      </div>
       <div class="filerobot-title">
         Highlights of the Filerobot Image Editor
       </div>
@@ -353,6 +357,7 @@
                           tabsIds={[TABS.ADJUST, TABS.ANNOTATE, TABS.WATERMARK]} // or {['Adjust', 'Annotate', 'Watermark']}
                           defaultTabId={TABS.ANNOTATE} // or 'Annotate'
                           defaultToolId={TOOLS.TEXT} // or 'Text'
+                          handleInpaint={() => alert('Hola')}
                         />
                       )}
                 &lt;/div>
