@@ -36,8 +36,6 @@ const AssemblyPoint = (props) => {
 
   const defaultAndProvidedConfigMerged = deepMerge(defaultConfig, props);
 
-  console.log(defaultAndProvidedConfigMerged, defaultConfig, props);
-
   return (
     <React.StrictMode>
       <ThemeProvider theme={defaultAndProvidedConfigMerged.theme}>

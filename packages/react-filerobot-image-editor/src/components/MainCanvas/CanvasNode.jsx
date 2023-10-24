@@ -42,6 +42,7 @@ const CanvasNode = ({ children }) => {
   const isZoomEnabled = !disableZooming && toolId !== TOOLS_IDS.CROP;
   const [isPanningEnabled, setIsPanningEnabled] = useState(
     tabId !== TABS_IDS.ANNOTATE &&
+      tabId !== TABS_IDS.INPAINT &&
       tabId !== TABS_IDS.WATERMARK &&
       zoom.factor > defaultZoomFactor,
   );
@@ -49,7 +50,8 @@ const CanvasNode = ({ children }) => {
   const cursorStyle = useMemo(
     () => ({
       cursor:
-        pointerCssIcon === POINTER_ICONS.DEFAULT && tabId === TABS_IDS.ANNOTATE
+        pointerCssIcon === POINTER_ICONS.DEFAULT &&
+        (tabId === TABS_IDS.ANNOTATE || tabId === TABS_IDS.INPAINT)
           ? POINTER_ICONS.DRAW
           : pointerCssIcon,
     }),
@@ -125,7 +127,9 @@ const CanvasNode = ({ children }) => {
 
   const resetPanningAbility = () =>
     setIsPanningEnabled(
-      tabId !== TABS_IDS.ANNOTATE || tabId === TABS_IDS.WATERMARK,
+      tabId !== TABS_IDS.ANNOTATE ||
+        tabId !== TABS_IDS.INPAINT ||
+        tabId === TABS_IDS.WATERMARK,
     );
 
   const endTouchesZoomingEnablePanning = () => {
@@ -175,6 +179,7 @@ const CanvasNode = ({ children }) => {
   useEffect(() => {
     setIsPanningEnabled(
       tabId !== TABS_IDS.ANNOTATE &&
+        tabId !== TABS_IDS.INPAINT &&
         tabId !== TABS_IDS.WATERMARK &&
         zoom.factor > defaultZoomFactor,
     );
