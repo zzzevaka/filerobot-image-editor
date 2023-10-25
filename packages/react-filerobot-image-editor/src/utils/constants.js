@@ -46,6 +46,7 @@ export const TOOLS_IDS = {
   PEN: 'Pen',
   RESIZE: 'Resize',
   PROMPT: 'Prompt',
+  INPAINT: 'Inpaint',
 };
 
 export const FLIP_DIRECTIONS = {

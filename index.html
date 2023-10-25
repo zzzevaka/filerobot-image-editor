@@ -5,10 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filerobot Image Editor Demo</title>
-    <meta
-      name="description"
-      content="The Filerobot Image Editor is the easiest way to integrate an easy-to-use image editor in your web application. Integrated with few lines of code, your users will be able to apply basic transformations like resize, crop, flip, finetune, annotate, watermark and various filters to any image."
-    />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
       rel="stylesheet"
@@ -357,7 +353,7 @@
                           tabsIds={[TABS.ADJUST, TABS.ANNOTATE, TABS.WATERMARK]} // or {['Adjust', 'Annotate', 'Watermark']}
                           defaultTabId={TABS.ANNOTATE} // or 'Annotate'
                           defaultToolId={TOOLS.TEXT} // or 'Text'
-                          handleInpaint={() => alert('Hola')}
+                          onInpaint={() => alert('Hola')}
                         />
                       )}
                 &lt;/div>

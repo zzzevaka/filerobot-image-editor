@@ -63,7 +63,7 @@ const pluginConfig = {
   ...config,
   source: 'https://scaleflex.cloudimg.io/v7/demo/river.png',
   tabsIds: selectedTabs,
-  defaultTabId: TABS.RESIZE,
+  defaultTabId: TABS.INPAINT,
   defaultToolId: null,
   observePluginContainerSize: true,
   cloudimage: {

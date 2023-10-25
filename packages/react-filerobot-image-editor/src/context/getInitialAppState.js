@@ -67,7 +67,6 @@ const getInitialAppState = (config = {}) => {
     isResetted: true,
     haveNotSavedChanges: false,
     latestColors: {},
-    handleInpaint: config.handleInpaint,
   };
 };
 

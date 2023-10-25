@@ -28,6 +28,8 @@ const AnnotationOptions = ({
   morePoppableOptionsAppended,
   annotation,
   updateAnnotation,
+  hideOpacityOption,
+  hideShadowOption,
   hideFillOption,
   hidePositionField,
   className,
@@ -39,18 +41,29 @@ const AnnotationOptions = ({
     config: { useCloudimage },
     t,
   } = useStore();
+
+  const shadowOption = !hideShadowOption
+    ? {
+        titleKey: 'shadow',
+        name: POPPABLE_OPTIONS.SHADOW,
+        Icon: Shadow,
+      }
+    : undefined;
+
   const options = useMemo(
     () => [
       ...morePoppableOptionsPrepended,
-      {
-        titleKey: 'opacity',
-        name: POPPABLE_OPTIONS.OPACITY,
-        Icon: Transparency,
-      },
+      !hideOpacityOption
+        ? {
+            titleKey: 'opacity',
+            name: POPPABLE_OPTIONS.OPACITY,
+            Icon: Transparency,
+          }
+        : undefined,
       ...(!useCloudimage
         ? [
             { titleKey: 'stroke', name: POPPABLE_OPTIONS.STROKE, Icon: Stroke },
-            { titleKey: 'shadow', name: POPPABLE_OPTIONS.SHADOW, Icon: Shadow },
+            shadowOption,
           ]
         : []),
       !hidePositionField
@@ -143,8 +156,11 @@ AnnotationOptions.defaultProps = {
   morePoppableOptionsPrepended: [],
   moreOptionsPopupComponentsObj: {},
   morePoppableOptionsAppended: [],
+  hideOpacityOption: false,
+  hideShadowOption: false,
   hideFillOption: false,
   hidePositionField: false,
+  hideStokeColorOption: false,
   className: undefined,
 };
 
@@ -152,6 +168,8 @@ AnnotationOptions.propTypes = {
   annotation: PropTypes.instanceOf(Object).isRequired,
   updateAnnotation: PropTypes.func.isRequired,
   children: PropTypes.node,
+  hideOpacityOption: PropTypes.bool,
+  hideShadowOption: PropTypes.bool,
   hideFillOption: PropTypes.bool,
   morePoppableOptionsPrepended: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
   morePoppableOptionsAppended: PropTypes.arrayOf(PropTypes.instanceOf(Object)),

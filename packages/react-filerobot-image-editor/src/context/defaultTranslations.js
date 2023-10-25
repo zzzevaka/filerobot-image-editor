@@ -15,6 +15,7 @@ export default {
   zoomInTitle: 'Zoom in',
   zoomOutTitle: 'Zoom out',
   toggleZoomMenuTitle: 'Toggle zoom menu',
+  inpaintTab: 'AI',
   adjustTab: 'Adjust',
   finetuneTab: 'Finetune',
   filtersTab: 'Filters',
@@ -99,4 +100,6 @@ export default {
   fitSize: 'Fit size',
   addImageTitle: 'Select image to add...',
   mutualizedFailedToLoadImg: 'Failed to load image.',
+  prompt: 'Prompt',
+  create: 'Create',
 };

@@ -17,8 +17,8 @@ import { PenButton, PenOptions } from './Pen';
 import { LineButton, LineOptions } from './Line';
 import { ArrowButton, ArrowOptions } from './Arrow';
 import { PolygonButton, PolygonOptions } from './Polygon';
-import { PromptButton, PromptOptions } from './Prompt';
 import { Resize } from './Resize';
+import { Inpaint } from './Inpaint';
 import { Watermark } from './Watermark';
 
 export const TOOLS_ITEMS = {
@@ -118,10 +118,9 @@ export const TOOLS_ITEMS = {
     id: TOOLS_IDS.RESIZE,
     Item: Resize,
   },
-  [TOOLS_IDS.PROMPT]: {
-    id: TOOLS_IDS.PROMPT,
-    Item: PromptButton,
-    ItemOptions: PromptOptions,
+  [TOOLS_IDS.INPAINT]: {
+    id: TOOLS_IDS.INPAINT,
+    Item: Inpaint,
   },
 };
 
@@ -152,9 +151,5 @@ export const TABS_TOOLS = {
     TOOLS_IDS.ARROW,
   ],
   [TABS_IDS.RESIZE]: [TOOLS_IDS.RESIZE],
-  [TABS_IDS.INPAINT]: [
-    TOOLS_IDS.PEN,
-    TOOLS_IDS.RECT,
-    TOOLS_IDS.PROMPT,
-  ],
+  [TABS_IDS.INPAINT]: [TOOLS_IDS.INPAINT],
 };

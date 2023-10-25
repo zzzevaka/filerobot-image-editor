@@ -37,7 +37,11 @@ const useAnnotation = (annotation = {}, enablePreview = true) => {
       type: SET_ANNOTATION,
       payload: savableAnnotationData,
     });
-    if (savableAnnotationData.id && annotation.name !== TOOLS_IDS.PEN) {
+    if (
+      savableAnnotationData.id &&
+      annotation.name !== TOOLS_IDS.PEN &&
+      annotation.name !== TOOLS_IDS.INPAINT
+    ) {
       debounce(() => {
         dispatch({
           type: SELECT_ANNOTATION,

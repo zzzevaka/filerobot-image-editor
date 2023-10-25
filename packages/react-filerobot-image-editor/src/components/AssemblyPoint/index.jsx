@@ -54,7 +54,6 @@ AssemblyPoint.defaultProps = {
   cloudimage: {},
   // TODO: Remove this property from here after PROD. release
   img: undefined,
-  handleInpaint: () => {},
 };
 
 AssemblyPoint.propTypes = {
@@ -73,7 +72,6 @@ AssemblyPoint.propTypes = {
   ]),
   useCloudimage: PropTypes.bool,
   cloudimage: PropTypes.instanceOf(Object),
-  handleInpaint: PropTypes.func,
 };
 
 export default memo(AssemblyPoint);

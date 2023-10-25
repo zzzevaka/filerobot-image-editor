@@ -6,12 +6,18 @@ import {
   ImageFilters,
   Watermark,
   Resize,
+  Code, Delivery, RobotHappy, Heart, Like, Nsfw, Play, Puzzle, Rocket, RobotSad, RobotWorried, Saturation, Secret,
 } from '@scaleflex/icons';
 
 /** Internal Dependencies */
 import { TABS_IDS } from 'utils/constants';
 
 export const AVAILABLE_TABS = [
+  {
+    id: TABS_IDS.INPAINT,
+    labelKey: 'inpaintTab',
+    icon: Rocket,
+  },
   {
     id: TABS_IDS.ADJUST,
     labelKey: 'adjustTab',
@@ -42,11 +48,6 @@ export const AVAILABLE_TABS = [
   {
     id: TABS_IDS.RESIZE,
     labelKey: 'resizeTab',
-    icon: Resize,
-  },
-  {
-    id: TABS_IDS.INPAINT,
-    labelKey: 'inpaintTab',
     icon: Resize,
   },
 ];

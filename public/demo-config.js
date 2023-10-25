@@ -163,7 +163,7 @@ const config = {
   // shadowOpacity: 1,
   // opacity: 1,
   // },
-  [TOOLS.PEN]: {
+  [TOOLS.INPAINT]: {
     stroke: '#bf23d7',
     strokeWidth: 20,
     tension: 0.5,
@@ -327,7 +327,8 @@ const config = {
       onClick: (_openSaveModal, saveDirectly) => saveDirectly(console.log),
     },
   ],
-  handleInpaint: (config) => {
+  onInpaint: (config) => {
+    console.log(config);
     return new Promise((resolve, reject) => {
       console.log('start');
       setTimeout(() => {
