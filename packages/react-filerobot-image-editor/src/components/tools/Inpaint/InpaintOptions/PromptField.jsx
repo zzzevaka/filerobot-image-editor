@@ -1,5 +1,5 @@
 /** External Dependencies */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Label from '@scaleflex/ui/core/label';
 
@@ -8,14 +8,18 @@ import { StyledSpacedOptionFields } from 'components/common/AnnotationOptions/An
 import { StyledPromptTextarea } from './Propmt.styled';
 
 const PromptField = ({ annotation, updateAnnotation, t }) => {
+  const [prompt, setPrompt] = useState(annotation.prompt);
+
+  // Straitforward update of annotations leads to bug. Workarounded. Need investigate
+  const handlePromptChange = (e) => {
+    setPrompt(e.target.value);
+    updateAnnotation({ prompt: e.target.value });
+  };
+
   return (
     <StyledSpacedOptionFields className="FIE_prompt-tool-options-wrapper">
       <Label>{t('prompt')}</Label>
-      <StyledPromptTextarea
-        value={annotation.prompt}
-        onChange={(e) => updateAnnotation({ prompt: e.target.value })}
-        multiline
-      />
+      <StyledPromptTextarea value={prompt} onChange={handlePromptChange} />
     </StyledSpacedOptionFields>
   );
 };

@@ -39,7 +39,7 @@ const Inpaint = ({ t }) => {
       prompt: '',
       ...config.annotationsCommon,
       ...config[TOOLS_IDS.INPAINT],
-      name: TOOLS_IDS.INPAINT,
+      name: TOOLS_IDS.PEN,
     },
     false,
   );
@@ -96,7 +96,7 @@ const Inpaint = ({ t }) => {
   const handlePointerUp = useCallback(() => {
     if (
       updatedPen.current.id &&
-      config[TOOLS_IDS.INPAINT].selectAnnotationAfterDrawing
+      config[TOOLS_IDS.INPAINT]?.selectAnnotationAfterDrawing
     ) {
       dispatch({
         type: SELECT_ANNOTATION,
@@ -155,8 +155,8 @@ const Inpaint = ({ t }) => {
 
     window.msk = msk;
 
-    config
-      ?.onInpaint({
+    config[TOOLS_IDS.INPAINT]
+      ?.onSubmit({
         image: img.imageData.imageBase64,
         mask: msk.imageData.imageBase64,
         maskArea: calculateMaskArea(msk.designState),

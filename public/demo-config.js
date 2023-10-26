@@ -7,6 +7,7 @@ import CropCinemaScope from '@scaleflex/icons/crop-cinema-scope';
 
 import FilerobotImageEditor from 'filerobot-image-editor/src';
 import toPrecisedFloat from 'react-filerobot-image-editor/src/utils/toPrecisedFloat';
+import {resolve} from "@babel/core/lib/vendor/import-meta-resolve";
 
 const { TOOLS } = FilerobotImageEditor;
 
@@ -150,6 +151,17 @@ const cropFolderPresets = [
 ];
 
 const config = {
+  [TOOLS.INPAINT]: {
+    stroke: '#F0A',
+    strokeWidth: 40,
+    opacity: 0.8,
+    onSubmit: (config) => {
+      console.log(config);
+      return new Promise((resolve) => {
+        resolve(config.mask);
+      })
+    },
+  },
   // source:
   //   'https://api.filerobot.com/scaleflex-tests-v5a/v3/get/d8880a7c-94fc-5524-b1de-a61de6650000?version=1638547407275',
   // annotationsCommon: {
@@ -163,14 +175,6 @@ const config = {
   // shadowOpacity: 1,
   // opacity: 1,
   // },
-  [TOOLS.INPAINT]: {
-    stroke: '#bf23d7',
-    strokeWidth: 20,
-    tension: 0.5,
-    opacity: 0.5,
-    lineCap: 'round',
-    selectAnnotationAfterDrawing: false,
-  },
   [TOOLS.CROP]: {
     // maxWidth: 700,
     // maxHeight: 300,
@@ -327,16 +331,6 @@ const config = {
       onClick: (_openSaveModal, saveDirectly) => saveDirectly(console.log),
     },
   ],
-  onInpaint: (config) => {
-    console.log(config);
-    return new Promise((resolve, reject) => {
-      console.log('start');
-      setTimeout(() => {
-        console.log('finish');
-        resolve(config.mask);
-      }, 2000);
-    });
-  },
   // defaultImageFileName: 'Test',
   // theme: {},
   // useBackendTranslations: true, // if false, translations object will be used if not provided default translations will be there.

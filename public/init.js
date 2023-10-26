@@ -42,12 +42,14 @@ const DEFAULT_IMAGES_SRCS = [
 ];
 
 const selectedTabs = [
+  TABS.INPAINT,
+  TABS.ANNOTATE,
   TABS.ADJUST,
   TABS.FINETUNE,
   TABS.FILTERS,
-  TABS.WATERMARK,
-  TABS.ANNOTATE,
-  TABS.RESIZE,
+  // TABS.WATERMARK,
+  //
+  // TABS.RESIZE,
 ];
 
 const IMG_EDITOR_TABS = {
@@ -208,7 +210,7 @@ function changeModeHandler() {
     useCloudimage = false;
   }
 
-  filerobotImageEditor.render({ useCloudimage, tabsIds: [...selectedTabs] });
+  // filerobotImageEditor.render({ useCloudimage, tabsIds: [...selectedTabs] });
 }
 
 function changeCodeTabHandler(event) {
