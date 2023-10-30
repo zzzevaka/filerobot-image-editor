@@ -156,9 +156,10 @@ const config = {
     strokeWidth: 40,
     opacity: 0.8,
     onSubmit: (config) => {
-      console.log(config);
       return new Promise((resolve) => {
-        resolve(config.mask);
+        setTimeout(() => {
+          resolve(config.mask);
+        }, 1000);
       })
     },
   },

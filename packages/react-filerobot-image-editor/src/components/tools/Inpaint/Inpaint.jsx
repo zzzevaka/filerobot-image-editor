@@ -1,5 +1,5 @@
 /** External Dependencies */
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useAnnotation, useStore, useTransformedImgData } from 'hooks';
 import PropTypes from 'prop-types';
 import Button from '@scaleflex/ui/core/button';
@@ -148,33 +148,39 @@ const Inpaint = ({ t }) => {
   }, [designLayer]);
 
   const handleSubmit = () => {
-    const img = transformImgFn({ mask: false });
-    const msk = transformImgFn({ mask: true });
-
     dispatch({ type: SHOW_LOADER });
 
-    window.msk = msk;
+    setTimeout(() => {
+      const img = transformImgFn({ mask: false });
+      const msk = transformImgFn({ mask: true });
 
-    config[TOOLS_IDS.INPAINT]
-      ?.onSubmit({
+      const payload = {
         image: img.imageData.imageBase64,
-        mask: msk.imageData.imageBase64,
-        maskArea: calculateMaskArea(msk.designState),
         prompt: inpaint.prompt,
-      })
-      .then((newImageUrl) => {
-        const imageElement = new Image();
-        imageElement.src = newImageUrl;
-        imageElement.onload = () => {
-          dispatch({
-            type: REPLACE_IMAGE,
-            payload: {
-              originalImage: imageElement,
-            },
-          });
-        };
-      })
-      .then(() => dispatch({ type: HIDE_LOADER }));
+      };
+
+      if (msk) {
+        payload.mask = msk.imageData.imageBase64;
+        payload.maskArea = calculateMaskArea(msk.designState);
+      }
+
+      config[TOOLS_IDS.INPAINT]
+        ?.onSubmit(payload)
+        .then((newImageUrl) => {
+          const imageElement = new Image();
+          imageElement.src = newImageUrl;
+          imageElement.onload = () => {
+            dispatch({
+              type: REPLACE_IMAGE,
+              payload: {
+                originalImage: imageElement,
+              },
+            });
+            dispatch({ type: HIDE_LOADER });
+          };
+        })
+        .catch(() => () => dispatch({ type: HIDE_LOADER }));
+    }, 0);
   };
 
   return (
