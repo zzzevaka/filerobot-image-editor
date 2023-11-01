@@ -179,7 +179,7 @@ const Inpaint = ({ t }) => {
             dispatch({ type: HIDE_LOADER });
           };
         })
-        .catch(() => () => dispatch({ type: HIDE_LOADER }));
+        .catch(() => dispatch({ type: HIDE_LOADER }));
     }, 0);
   };
 

@@ -39,6 +39,7 @@ import setResize, { SET_RESIZE } from './setResize';
 import setSaved, { SET_SAVED } from './setSaved';
 import updateState, { UPDATE_STATE } from './updateState';
 import setLatestColor, { SET_LATEST_COLOR } from './setLatestColor';
+import switchDraggable, { SWITCH_DRAGGABLE } from './switchDraggable';
 
 export default {
   [SET_ORIGINAL_IMAGE]: setOriginalImage,
@@ -72,6 +73,7 @@ export default {
   [UNDO]: undo,
   [REDO]: redo,
   [RESET]: reset,
+  [SWITCH_DRAGGABLE]: switchDraggable,
   [SET_SAVED]: setSaved,
   [UPDATE_STATE]: updateState,
 };
@@ -107,6 +109,7 @@ export {
   UNDO,
   REDO,
   RESET,
+  SWITCH_DRAGGABLE,
   SET_SAVED,
   UPDATE_STATE,
 };

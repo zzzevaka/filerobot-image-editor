@@ -27,6 +27,7 @@ const CanvasNode = ({ children }) => {
   const canvasRef = useRef();
   const {
     dispatch,
+    draggable,
     pointerCssIcon,
     tabId,
     toolId,
@@ -70,7 +71,7 @@ const CanvasNode = ({ children }) => {
       e.currentTarget.draggable() &&
       e.target.nodeType.toLowerCase() === 'stage' &&
       isZoomEnabled &&
-      isPanningEnabled
+      (isPanningEnabled || draggable)
     ) {
       saveZoom({
         factor: zoom.factor,
@@ -127,8 +128,8 @@ const CanvasNode = ({ children }) => {
 
   const resetPanningAbility = () =>
     setIsPanningEnabled(
-      tabId !== TABS_IDS.ANNOTATE ||
-        tabId !== TABS_IDS.INPAINT ||
+      tabId !== TABS_IDS.ANNOTATE &&
+        tabId !== TABS_IDS.INPAINT &&
         tabId === TABS_IDS.WATERMARK,
     );
 
@@ -171,10 +172,11 @@ const CanvasNode = ({ children }) => {
     dispatch({
       type: CHANGE_POINTER_ICON,
       payload: {
-        pointerCssIcon: POINTER_ICONS[isPanningEnabled ? 'DRAG' : 'DEFAULT'],
+        pointerCssIcon:
+          POINTER_ICONS[isPanningEnabled || draggable ? 'DRAG' : 'DEFAULT'],
       },
     });
-  }, [isPanningEnabled]);
+  }, [isPanningEnabled, draggable]);
 
   useEffect(() => {
     setIsPanningEnabled(
@@ -206,6 +208,7 @@ const CanvasNode = ({ children }) => {
   // it's done by toggling panning through mouse right click (enable/disable) then drag mouse.
   const zoomedResponsiveCanvasScale =
     canvasScale * ((isZoomEnabled && zoom.factor) || defaultZoomFactor);
+
   return (
     <StyledCanvasNode
       className="FIE_canvas-node"
@@ -227,7 +230,7 @@ const CanvasNode = ({ children }) => {
       onDragStart={preventDraggingIfMultiTouches}
       onTouchEnd={isZoomEnabled ? endTouchesZoomingEnablePanning : undefined}
       dragBoundFunc={dragBoundFunc}
-      draggable={isZoomEnabled && isPanningEnabled}
+      draggable={isZoomEnabled && (isPanningEnabled || draggable)}
       onDragEnd={handleCanvasDragEnd}
       style={cursorStyle}
     >

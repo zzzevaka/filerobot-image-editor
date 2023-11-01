@@ -95,6 +95,16 @@ const StyledResizeOnSave = styled.div`
   width: 100%;
 `;
 
+const StyledDraggableButton = styled(IconButton)`
+  margin: ${({ margin }) => margin ?? '0 4px'};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  padding: 2px;
+`;
+
 export {
   StyledTopbar,
   StyledFlexCenterAlignedContainer,
@@ -110,4 +120,5 @@ export {
   StyledResizeOnSave,
   StyledDimensionsLabel,
   StyledHistoryButtonsWrapper,
+  StyledDraggableButton,
 };

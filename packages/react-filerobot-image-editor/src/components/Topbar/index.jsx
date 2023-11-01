@@ -3,12 +3,14 @@ import React from 'react';
 
 /** Internal Dependencies */
 import Separator from 'components/common/Separator';
-import { usePhoneScreen, useStore } from 'hooks';
+import { useStore } from 'hooks';
+import { TABS_IDS } from 'utils/constants';
 import CloseButton from './CloseButton';
 import SaveButton from './SaveButton';
 import ResetButton from './ResetButton';
 import UndoButton from './UndoButton';
 import RedoButton from './RedoButton';
+import SwithDraggableButton from './SwithDraggableButton';
 import ImageDimensionsAndDisplayToggle from './ImageDimensionsAndDisplayToggle';
 import CanvasZooming from './CanvasZooming';
 import {
@@ -20,7 +22,13 @@ import BackButton from './BackButton';
 
 const Topbar = () => {
   const {
-    config: { showBackButton, disableZooming },
+    config: {
+      showResetButton,
+      showBackButton,
+      showDimensionsTogge,
+      disableZooming,
+    },
+    tabId,
   } = useStore();
 
   return (
@@ -31,16 +39,23 @@ const Topbar = () => {
       >
         <SaveButton />
         <StyledHistoryButtonsWrapper className="FIE_topbar-history-buttons">
-          <ResetButton margin="0" />
+          {showResetButton && <ResetButton margin="0" />}
           <UndoButton margin="0" />
           <RedoButton margin="0" />
         </StyledHistoryButtonsWrapper>
       </StyledFlexCenterAlignedContainer>
       <StyledFlexCenterAlignedContainer className="FIE_topbar-center-options">
-        <ImageDimensionsAndDisplayToggle />
+        {showDimensionsTogge && (
+          <>
+            <ImageDimensionsAndDisplayToggle />
+            <Separator />
+          </>
+        )}
         {!disableZooming && (
           <>
-            <Separator />
+            {(tabId === TABS_IDS.INPAINT ||
+              tabId === TABS_IDS.ANNOTATE ||
+              tabId === TABS_IDS.WATERMARK) && <SwithDraggableButton />}
             <CanvasZooming />
           </>
         )}
