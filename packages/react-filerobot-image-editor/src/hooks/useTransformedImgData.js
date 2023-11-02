@@ -83,9 +83,12 @@ const useTransformedImgData = () => {
     // so it should apply elliptical crop if it is not applied and user is chosing ellitpical ratio.
     designLayer.setAttr('isSaving', true);
 
-    const preparedCanvas = designLayer.getStage().clone({
-      width: originalImage.width,
-      height: originalImage.height,
+    const stage = designLayer.getStage();
+    const imageNode = stage.findOne(`#${IMAGE_NODE_ID}`);
+
+    const preparedCanvas = stage.clone({
+      width: imageNode.width(),
+      height: imageNode.height(),
       scaleX: isFlippedX ? -1 : 1,
       scaleY: isFlippedY ? -1 : 1,
     });
@@ -203,6 +206,7 @@ const useTransformedImgData = () => {
     // then we convert mime to image/jpeg and name the file with .jpg
     const finalOptions = {
       mimeType: `image/${extension === 'jpg' ? 'jpeg' : extension}`,
+      pixelRatio: originalImage.width / preparedCanvas.width(),
       ...(isQualityAcceptable ? { quality } : {}),
     };
     const finalCanvas = preparedCanvas.toCanvas(finalOptions);

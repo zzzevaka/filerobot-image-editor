@@ -150,37 +150,44 @@ const Inpaint = ({ t }) => {
   const handleSubmit = () => {
     dispatch({ type: SHOW_LOADER });
 
-    setTimeout(() => {
-      const img = transformImgFn({ mask: false });
-      const msk = transformImgFn({ mask: true });
+    try {
+      const img = transformImgFn({ mask: false }, false, true);
+      const msk = transformImgFn({ mask: true }, false, true);
 
       const payload = {
         image: img.imageData.imageBase64,
         prompt: inpaint.prompt,
       };
 
-      if (msk) {
+      const mskArea = calculateMaskArea(msk.designState);
+
+      if (mskArea) {
         payload.mask = msk.imageData.imageBase64;
         payload.maskArea = calculateMaskArea(msk.designState);
       }
 
-      config[TOOLS_IDS.INPAINT]
-        ?.onSubmit(payload)
-        .then((newImageUrl) => {
-          const imageElement = new Image();
-          imageElement.src = newImageUrl;
-          imageElement.onload = () => {
-            dispatch({
-              type: REPLACE_IMAGE,
-              payload: {
-                originalImage: imageElement,
-              },
-            });
-            dispatch({ type: HIDE_LOADER });
-          };
-        })
-        .catch(() => dispatch({ type: HIDE_LOADER }));
-    }, 0);
+      if (!payload.mask && !payload.prompt) {
+        dispatch({ type: HIDE_LOADER });
+        return;
+      }
+
+      config[TOOLS_IDS.INPAINT]?.onSubmit(payload).then((newImageUrl) => {
+        const imageElement = new Image();
+        imageElement.src = newImageUrl;
+        imageElement.onload = () => {
+          dispatch({
+            type: REPLACE_IMAGE,
+            payload: {
+              originalImage: imageElement,
+            },
+          });
+          dispatch({ type: HIDE_LOADER });
+        };
+      });
+    } catch (e) {
+      dispatch({ type: HIDE_LOADER });
+      throw e;
+    }
   };
 
   return (
@@ -204,7 +211,6 @@ const Inpaint = ({ t }) => {
         className="FIE_inpaint-submit-button"
         size="sm"
         onClick={handleSubmit}
-        disabled={!inpaint.prompt}
         title={t('create')}
       >
         {t('create')}
