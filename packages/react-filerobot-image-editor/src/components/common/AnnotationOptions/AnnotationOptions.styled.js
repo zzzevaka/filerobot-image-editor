@@ -43,10 +43,10 @@ const StyledColumn = styled.div`
 
 const StyledIconWrapper = styled.div(
   ({ theme, addThinBorder, noMargin, secondaryIconColor }) => `
+    display: flex;
     cursor: pointer;
     padding: 3px 6px;
     margin: ${noMargin ? 0 : '0 4px'};
-    display: inline-block;
 
     svg {
       vertical-align: middle;
@@ -74,6 +74,10 @@ const StyledIconWrapper = styled.div(
   `,
 );
 
+const StyledOptionLabel = styled(Label)`
+  margin-left: 6px;
+`;
+
 export {
   StyledHeadline,
   StyledTwoColumnsContainer,
@@ -82,4 +86,5 @@ export {
   StyledSpacedOptionFields,
   StyledOptions,
   StyledOptionPopupContent,
+  StyledOptionLabel,
 };

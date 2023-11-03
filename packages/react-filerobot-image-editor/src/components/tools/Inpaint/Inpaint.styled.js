@@ -5,6 +5,7 @@ import Input from '@scaleflex/ui/core/input';
 import Label from '@scaleflex/ui/core/label';
 
 const StyledInpaintWrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,25 +16,4 @@ const StyledInpaintSliderField = styled.div`
   padding: 8px 12px;
 `;
 
-const StyledInpaintInput = styled(Input)`
-  width: 70px;
-  height: 24px;
-  margin: ${({ noLeftMargin }) => (noLeftMargin ? '8px 8px 8px 0' : '8px')};
-`;
-
-const StyledRatioLockIcon = styled(IconButton)`
-  margin-right: 16px;
-`;
-
-const StyledXLabel = styled(Label)`
-  font-size: 13px;
-  line-height: 15px;
-`;
-
-export {
-  StyledInpaintSliderField,
-  StyledInpaintWrapper,
-  StyledInpaintInput,
-  StyledRatioLockIcon,
-  StyledXLabel,
-};
+export { StyledInpaintSliderField, StyledInpaintWrapper };

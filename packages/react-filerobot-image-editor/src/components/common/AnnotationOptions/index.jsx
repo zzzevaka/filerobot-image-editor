@@ -17,6 +17,7 @@ import {
   StyledOptionPopupContent,
   StyledOptions,
   StyledIconWrapper,
+  StyledOptionLabel,
 } from './AnnotationOptions.styled';
 import { POPPABLE_OPTIONS } from './AnnotationOptions.constants';
 import ColorInput from '../ColorInput';
@@ -28,6 +29,7 @@ const AnnotationOptions = ({
   morePoppableOptionsAppended,
   annotation,
   updateAnnotation,
+  hideStrokeOption,
   hideOpacityOption,
   hideShadowOption,
   hideFillOption,
@@ -41,6 +43,14 @@ const AnnotationOptions = ({
     config: { useCloudimage },
     t,
   } = useStore();
+
+  const strokeOption = !hideStrokeOption
+    ? {
+        titleKey: 'stroke',
+        name: POPPABLE_OPTIONS.STROKE,
+        Icon: Stroke,
+      }
+    : undefined;
 
   const shadowOption = !hideShadowOption
     ? {
@@ -60,12 +70,7 @@ const AnnotationOptions = ({
             Icon: Transparency,
           }
         : undefined,
-      ...(!useCloudimage
-        ? [
-            { titleKey: 'stroke', name: POPPABLE_OPTIONS.STROKE, Icon: Stroke },
-            shadowOption,
-          ]
-        : []),
+      ...(!useCloudimage ? [strokeOption, shadowOption] : []),
       !hidePositionField
         ? {
             titleKey: 'position',
@@ -127,6 +132,9 @@ const AnnotationOptions = ({
               onClick={(e) => toggleOptionPopup(e, option.name)}
             >
               <option.Icon size={18} />
+              {option.label && (
+                <StyledOptionLabel>{t(option.label)}</StyledOptionLabel>
+              )}
             </StyledIconWrapper>
           ),
       )}
@@ -160,7 +168,7 @@ AnnotationOptions.defaultProps = {
   hideShadowOption: false,
   hideFillOption: false,
   hidePositionField: false,
-  hideStokeColorOption: false,
+  hideStrokeOption: false,
   className: undefined,
 };
 
@@ -171,6 +179,7 @@ AnnotationOptions.propTypes = {
   hideOpacityOption: PropTypes.bool,
   hideShadowOption: PropTypes.bool,
   hideFillOption: PropTypes.bool,
+  hideStrokeOption: PropTypes.bool,
   morePoppableOptionsPrepended: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
   morePoppableOptionsAppended: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
   moreOptionsPopupComponentsObj: PropTypes.instanceOf(Object),

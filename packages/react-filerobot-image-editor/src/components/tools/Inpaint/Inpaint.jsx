@@ -202,6 +202,7 @@ const Inpaint = ({ t }) => {
           t={t}
           hidePositionField
           hideFillOption
+          hideStrokeOption
           hideOpacityOption
           hideShadowOption
           hideStrokeColorInput
