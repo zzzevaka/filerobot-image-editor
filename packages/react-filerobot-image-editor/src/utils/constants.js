@@ -45,7 +45,6 @@ export const TOOLS_IDS = {
   WATERMARK: 'Watermark',
   PEN: 'Pen',
   RESIZE: 'Resize',
-  PROMPT: 'Prompt',
   INPAINT: 'Inpaint',
 };
 

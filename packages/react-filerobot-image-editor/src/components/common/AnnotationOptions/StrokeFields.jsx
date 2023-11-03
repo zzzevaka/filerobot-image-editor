@@ -1,5 +1,5 @@
 /** External Dependencies */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Label from '@scaleflex/ui/core/label';
 
@@ -12,17 +12,23 @@ import Slider from '../Slider';
 const MIN_PERCENTANGE = 0;
 const MAX_PERCENTANGE = 100;
 
-const StrokeFields = ({ annotation, updateAnnotation, t, hideStrokeColorInput }) => {
-  const { stroke, strokeWidth } = annotation;
+const StrokeFields = ({
+  annotation,
+  updateAnnotation,
+  t,
+  hideStrokeColorInput,
+}) => {
+  const [strokeWidth, setStrokeWidth] = useState(annotation.strokeWidth);
 
   const changeStrokeWidth = (newStrokeWidth) => {
-    updateAnnotation({
-      strokeWidth: restrictNumber(
-        newStrokeWidth,
-        MIN_PERCENTANGE,
-        MAX_PERCENTANGE,
-      ),
-    });
+    const newValue = restrictNumber(
+      newStrokeWidth,
+      MIN_PERCENTANGE,
+      MAX_PERCENTANGE,
+    );
+
+    setStrokeWidth(newValue);
+    updateAnnotation({ strokeWidth: newValue });
   };
 
   const changeStrokeColor = (newStrokeColor) => {
@@ -39,7 +45,7 @@ const StrokeFields = ({ annotation, updateAnnotation, t, hideStrokeColorInput })
       />
       {!hideStrokeColorInput ? (
         <ColorInput
-          color={stroke}
+          color={annotation.stroke}
           onChange={changeStrokeColor}
           colorFor="stroke"
         />

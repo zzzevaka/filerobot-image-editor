@@ -211,9 +211,9 @@ const Inpaint = ({ t }) => {
         className="FIE_inpaint-submit-button"
         size="sm"
         onClick={handleSubmit}
-        title={t('create')}
+        title={t('draw')}
       >
-        {t('create')}
+        {t('draw')}
       </Button>
     </StyledInpaintWrapper>
   );

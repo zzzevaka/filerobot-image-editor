@@ -101,5 +101,5 @@ export default {
   addImageTitle: 'Select image to add...',
   mutualizedFailedToLoadImg: 'Failed to load image.',
   prompt: 'Prompt',
-  create: 'Create',
+  draw: 'Draw',
 };

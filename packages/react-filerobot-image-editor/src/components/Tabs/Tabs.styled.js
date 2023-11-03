@@ -27,7 +27,8 @@ const StyledTabItem = styled.div(
 
     [data-phone='true'] & {
       margin-bottom: 0;
-      height: 50px;
+      flex-grow: 1;
+      height: 60px;
       border-radius: 0;
     }
 
