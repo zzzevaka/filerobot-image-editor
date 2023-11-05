@@ -25,7 +25,7 @@ const Topbar = () => {
     config: {
       showResetButton,
       showBackButton,
-      showDimensionsTogge,
+      showDimensionsToggle,
       disableZooming,
     },
     tabId,
@@ -45,7 +45,7 @@ const Topbar = () => {
         </StyledHistoryButtonsWrapper>
       </StyledFlexCenterAlignedContainer>
       <StyledFlexCenterAlignedContainer className="FIE_topbar-center-options">
-        {showDimensionsTogge && (
+        {showDimensionsToggle && (
           <>
             <ImageDimensionsAndDisplayToggle />
             <Separator />

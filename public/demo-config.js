@@ -362,13 +362,13 @@ const config = {
   // defaultSavedImageQuality: 0.92, // Min: 0.1, Max: 1, (1% - 100%) applied for 'jpg', 'jpeg' & 'webp' only
   // defaultSavedImageName: '',
   // forceToPngInEllipticalCrop: false, // in case the develop wants to force the saved image to be PNG if there is elliptical crop is done otherwise the provided savedImageType would be used.
-  // onClose: () => console.log('Act closing 👅'), // if we have value then close button will be shown unless showBackButton is true then if onClose has value the back button will be shown otherwise nothing will be shown.
+  onClose: () => console.log('Act closing 👅'), // if we have value then close button will be shown unless showBackButton is true then if onClose has value the back button will be shown otherwise nothing will be shown.
   // tabsIds: [TABS.ADJUST, TABS.WATERMARK],
   // savingPixelRatio: 4,
   // previewPixelRatio: window.devicePixelRatio,
   // defaultTabId: TABS.ADJUST,
   // defaultToolId: TOOLS.CROP,
-  // showBackButton: true,
+  showBackButton: true,
   // useCloudimage: true,
   // cloudimage: {
   //   token: 'test',

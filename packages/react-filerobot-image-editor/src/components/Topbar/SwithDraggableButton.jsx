@@ -22,7 +22,7 @@ const DraggableButton = ({ margin }) => {
       title={t('draggableTitle')}
       margin={margin}
     >
-      {draggable ? <Crop size={12} /> : <Brush size={12} />}
+      {draggable ? <Crop size="100%" /> : <Brush size="100%" />}
     </StyledDraggableButton>
   );
 };

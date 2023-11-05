@@ -28,6 +28,10 @@ const StyledHistoryButtonsWrapper = styled.div`
   margin: 0 4px;
   column-gap: 4px;
   align-items: center;
+  
+  [data-phone='true'] & {
+    margin-right: 16px;
+  }
 `;
 
 const StyledHistoryButton = styled(IconButton)`
@@ -38,6 +42,11 @@ const StyledHistoryButton = styled(IconButton)`
   width: 16px;
   height: 16px;
   padding: 2px;
+
+  [data-phone='true'] & {
+    width: 24px;
+    height: 24px;
+  }
 `;
 
 const StyledDimensionsLabel = styled(Label)`
@@ -45,10 +54,16 @@ const StyledDimensionsLabel = styled(Label)`
 `;
 
 const StyledSmallButton = styled(IconButton)`
+  display: flex;
+  justify-content: center;
   width: 20px;
   height: 20px;
   margin: 0 ${(props) => props.horizontalMargin ?? '4px'};
-  padding: 4px;
+  padding: 4px;  
+  [data-phone='true'] & {
+    width: 32px;
+    height: 32px;
+  }
 `;
 
 const StyledFlexCenterAlignedContainer = styled.div`
@@ -65,6 +80,10 @@ const StyledZoomPercentageLabel = styled(Label)`
 const StyledBackButtonLabel = styled.span`
   font-size: 11px;
   line-height: 12px;
+  [data-phone='true'] & {
+    font-size: 17px;
+    line-height: 20px;
+  }
 `;
 
 const StyledCloseOrBackButton = styled(IconButton)`
@@ -103,6 +122,11 @@ const StyledDraggableButton = styled(IconButton)`
   width: 16px;
   height: 16px;
   padding: 2px;
+  
+  [data-phone='true'] & {
+    width: 24px;
+    height: 24px;
+  }
 `;
 
 export {

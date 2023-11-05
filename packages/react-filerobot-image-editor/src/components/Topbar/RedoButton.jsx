@@ -23,7 +23,7 @@ const RedoButton = ({ margin }) => {
       title={t('redoTitle')}
       margin={margin}
     >
-      <Redo size={12} />
+      <Redo size="100%" />
     </StyledHistoryButton>
   );
 };
